@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block body %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/about-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Register</h1>
+            <span class="subheading">This is what I do.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{%from "_formhelpers.html" import render_field %}
+<div class="continer">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<h1 class="bg-info text-center">Register</h1>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+	
+    <form  action ="" method ="post" >
+    	{{form.csrf_token}}
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-4">
+				{{render_field(form.name, class="form-control")}}
+				{{render_field(form.username, class="form-control")}}
+				{{render_field(form.email, class="form-control")}}
+				{{render_field(form.password, class="form-control")}}
+				{{render_field(form.confirm, class="form-control")}}
+				{{form.profile()}}
+			</div>
+			<div class="col-md-4">
+				{{render_field(form.country, class="form-control")}}
+				{{render_field(form.state, class="form-control")}}
+				{{render_field(form.city, class="form-control")}}
+				{{render_field(form.contact, class="form-control")}}
+				{{render_field(form.address, class="form-control")}}
+				{{render_field(form.zipcode, class="form-control")}}
+				{{form.submit(class= "btn btn-sm btn-info float-right")}}
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</form>
+</div>
+{% endblock %}

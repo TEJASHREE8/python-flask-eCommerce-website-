@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block body %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/home-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>admin panel</h1>
+            <span class="subheading">manage your posts and change them</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{url_for('dashboard')}}">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('dashboard')}}">product <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add products
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{url_for('edit1')}}">Add product</a>
+                
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <h1>upload a file</h1>
+         we will add file uploader here
+
+        
+        <a href="/dashboard"><button class= " btn btn-primary">dashboard home</button></a>
+        <a href="/logout"><button class= " btn btn-primary">logout</button></a>
+        <hr>
+<h1>add/edit posts</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="text-center bg-info p-2 h4">Add a product</div>
+                {% from "_formhelpers.html" import render_field %}
+                <form method="post" enctype="multipart/form-data">
+                <div>
+                    {{ render_field(form.title, class="form-control") }}
+                    {{ render_field(form.slug, class="form-control") }}
+                    {{ render_field(form.price, class="form-control") }}
+                    {{ render_field(form.discount, class="form-control") }}
+                    {{ render_field(form.description, class="form-control", rows="10") }}
+                </div>
+                <div class="container">
+                    <div class="row">
+                        {% if post %}
+                        <div class="col-md-4"> <input type="file" name="image_1" id="image_1">
+                            <a href="{{url_for('static',filename='img/' + post.img_file)}}"> images/{{ post.img_file}}</a>
+                        </div>
+                        
+                        {% else %}
+                        <div class="col-md-4">{{ render_field(form.img_file) }}</div>
+                        
+                        {% endif %}
+                    </div>
+                </div>
+                <p><input type="submit" value="{% if post %}Update {% else %}Add{% endif %} post" class="btn-outline-info">
+                </form>
+            </div>
+      <div class="col-md-1"></div>
+    </div>
+</div>
+{% endblock  %}

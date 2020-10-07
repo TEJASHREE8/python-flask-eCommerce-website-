@@ -1,0 +1,96 @@
+
+{% extends "layout.html" %}
+{% block body %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/home-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>admin panel</h1>
+            <span class="subheading">manage your posts and change them </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <h1>basic action</h1>
+
+
+        <a href="/addpost"><button class= " btn btn-primary">add a new painting</button></a>
+        <a href="/logout"><button class= " btn btn-primary">logout</button></a>
+       
+        <hr>
+         <h1>upload a file</h1>
+         <form action="/uploader" method="post" enctype="multipart/form-data">
+           <input type="file" name="file1">
+           <button type="submit" class= " btn btn-primary">submit</button>
+         </form>
+         we will add file uploader here
+        <hr>
+
+<h1>edit posts</h1>
+
+
+     <!-- todo: fetch it using for loop from the database-->
+
+     welcome you are logged in
+     <div class="container">
+         <table class="table table-striped">
+    <thead>
+            <th>id</th>
+            <th>title</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Edit</th>
+            <th>Delete</th>
+    </thead>
+    <tbody>
+
+
+      {% for post in posts %}
+      <tr>
+        <td>{{post.id}}</td>
+        <td>{{post.title}}</td>
+        <td> <img src="{{url_for('static',filename='img/' + post.img_file)}}" alt="{{post.title}}" width="50" height="20">
+        </td>
+        <td>{{ post.price }}</td>
+        <td>{{ post.discount }}</td>
+        <td><a href="/addpost/{{post.id}}"><button class= "btn btn-primary">edit</button></a></td>
+        <td><a href="/delete/{{post.id}}"><button class= "btn-primary" data-toggle="modal" data-target="#exampleModal-{{post.id}}">Delete</button></a></td>
+        <td>{{loop.index}}</td>
+        </tr>
+      
+       <div class="modal fade" id="exampleModal-{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{post.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+    </tbody>
+  </table>
+ </div>
+    
+
+
+{% endblock %}

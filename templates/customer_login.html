@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
+
+    <title>customer panel</title>
+
+   
+
+ <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='css/signin.css')}}" rel="stylesheet">
+
+  </head>
+  <body class="text-center">
+    {% from "_formhelpers.html" import render_field %}
+                {% include '_messages.html' %}
+    <form class="form-signin" method="post">
+      
+       {{form.csrf_token}}
+      
+  
+  <h1 class="h3 mb-3 font-weight-normal"> login </h1>
+  
+  <div>
+                    {{ render_field(form.email, class="form-control") }}
+                    {{ render_field(form.password, class="form-control")}}
+  </div>
+ 
+ 
+  
+  <p><input type="submit" value="Login" class="btn-info">
+    <a href="/register"><button class="btn btn-lg btn-primary btn-block" class="text-center" type="submit">Register</button></a>
+  <p class="mt-5 mb-3 text-muted">&copy; {{params['blog_name']}}2020-2021</p>
+</form>
+
+</body>
+</html>
+
+

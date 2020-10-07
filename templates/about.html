@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/steve-johnson-b5HMwgoU2h4-unsplash.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>About Me</h1>
+            <span class="subheading">This is what I do.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  
+
+<div class="container p-3 my-3 bg-dark text-white"></div>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>{{params['about_text']}}
+          Jhonson attended art school in Los Angeles, studying at Loyola Marymount University while simultaneously serving as an apprentice under respected artists Jane Brucker and Roland Reiss. He is now based in his hometown in San Diego, where he returned after graduating in 2006 – top of his class in 2006. . It is Carini’s hope that you will completely lose yourself within his labyrinthine type art experiences to discover a new sense of self and emerge reborn.
+          jhonson’s motto is ‘Don’t be afraid to be different. Be afraid to be the same.’ A sentiment completely embraced by RED. This motto is echoed not only in the stunning and captivating works he creates but also the way he lives his life.
+
+“Painting has been the only way I’ve ever really felt like I can effectively communicate with a world I don’t always understand. Accepting myself and embracing who I am has provided me with an amazing opportunity to help others that feel the same way to feel more comfortable and find their voice.”
+
+    </p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

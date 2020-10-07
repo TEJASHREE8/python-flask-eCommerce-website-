@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block body %}
+{%include 'navbar.html' %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/home-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{params['blog_name']}}</h1>
+            <span class="subheading">{{params['tag_line']}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<!-- navbar starts here -->
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="/artwork">all product</a>
+      </li>
+       
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" >Cart {{session['Shoppingcart']|length}}</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6" id="b_image">
+      <img src="{{url_for('static', filename='img/' + post.img_file)}}" alt="{{post.title}}" width="400" height="400">
+    </div>
+    <div class="col-md-6">
+      <h4>post title: {{post.title}}</h4>
+      <hr>
+      <p>product price : ${{post.price}}</p>
+      {%if post.discount>0 %}
+      <P>Product discount: {{post.discount}}%</P>
+      {%endif%}
+      <hr>
+      <b>PRODUCT DESCRIPTION</b>
+      <p>{{post.description}}</p>
+      <a href="/addcart" class="bt btn-warning">add to cart</a>
+      <form action="{{url_for('AddCart')}}"  method="post">
+        <input type="hidden" name="post_id" value="{{post.id}}">
+        <button type="submit" class="btn btn-sm btn-warning">add cart</button>
+        
+        
+      </form>
+      
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 mt-3" id="s_image">
+    <hr>
+    <img src="{{url_for('static', filename='img/' +post.img_file)}}" alt="{{post.title}}" width="120" height="120" class="p-3">
+    
+  </div>
+</div>
+<script >
+  var b_image=document.getElementById('b_image');
+  var s_image=document.getElementById('s_image').getElementByTagName('img');
+  for(var i=0; i<s_image.length;i++){
+    s_image[i].addEventListener('click', full_image);
+  }
+
+  function full_image(){
+    var ImageSRC =this.getAttribute('src');
+    b_image.innerHTML = "<img src="+ImageSRC+ "width='400' height='400'>";
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,103 @@
+
+{% extends "layout.html" %}
+{% block body %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/steve-johnson-b5HMwgoU2h4-unsplash.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{params['blog_name']}}</h1>
+            <span class="subheading">{{params['tag_line']}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <!-- Main Content -->
+  
+
+<!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='css/gallary.css')}}" rel="stylesheet">
+  </header>
+
+     <!-- todo: fetch it using for loop from the database-->
+
+     
+      
+        
+        
+<body>
+
+<h2 style="text-align:center">Gallery</h2>
+
+<div class="container">
+  {% for post in posts %}
+  <div class="mySlides">
+    <div class="numbertext">{{params['no_of_posts']}}</div>
+    <img src="{{url_for('static',filename='img/' + post.img_file)}}"  style="width:100% ">
+  </div>
+  {% endfor %}
+  
+    
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+
+  <div style="text-align: center; background-color: #222; padding: 2px 16px; color: white">
+    <p id="caption"></p>
+  </div>
+
+  <div class="row" >
+
+    {% for post in posts %}
+    <div class="column">
+    
+      <img class="demo cursor" src="{{url_for('static',filename='img/' + post.img_file)}}"  style="width:100%" onclick="currentSlide(1)" alt="{{post.title}}">
+    </div>
+    
+  
+  {% endfor %}
+  </div>
+
+
+</div>
+
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+        
+</body>
+
+
+        
+        
+{% endblock %}

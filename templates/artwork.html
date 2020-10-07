@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+
+  <div class="container p-3 my-3 bg-dark text-white"></div>
+    <div class="row">
+        
+        {% for post in posts %}
+      <div class="col-md-3 mt-4">
+        <div class="card">
+            <img src="{{url_for('static', filename='img/' + post.img_file)}}" class="card-img-top" alt="{{post.title}}" height="200" width="200">
+            <div class="card-body">
+                
+              <h5 class="text-center">{{post.title}}</h5>
+              <p class="text-center">Price ${{post.price}} discount ${{post.discount}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{url_for('single_page',id=post.id)}}" class="float-right btn btn-sm btn-primary">Details</a>
+                <form action="{{url_for('AddCart')}}" method="post">
+                  <input type="hidden" name="post_id" value="{{post.id}}">
+                  <button type="submit" class="btn btn-sm btn-warning float-right">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+      </div>
+       
+        {% endfor %}
+        
+
+
+
+     </div>
+</div>
+{% endblock  %}

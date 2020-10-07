@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container">
+    <div class="row">
+        {% for post in posts %}
+      <div class="col-md-3 mt-4">
+        <div class="card">
+            <img src="{{url_for('static', filename='img/' + post.img_file)}}" class="card-img-top" alt="{{post.title}}" height="200" width="200">
+            <div class="card-body">
+                {% if post.discount > 0 %}
+                <h5 style="text-shadow: 1px 2px 2px #000; color: #f00; transform: rotate(-15deg); position: absolute; top: 23%; left: 25%; font-weight: 600;"> Discount {{post.discount}}</h5>
+                {% endif %}
+              <h5 class="text-center">{{post.title}}</h5>
+              <p class="text-center">Price ${{post.price}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{url_for('single_page',id=post.id)}}" class="float-left btn btn-sm btn-primary">Details</a>
+                <form action="{{url_for('AddCart')}}" method="post">
+                  <input type="hidden" name="product_id" value="{{post.id}}">
+                  <button type="submit" class="btn btn-sm btn-warning float-right">Add to Cart</button>
+                  
+                  
+              </form>
+            </div>
+        </div>
+      </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock content %}

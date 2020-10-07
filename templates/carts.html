@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+
+<div class="container p-3 mt-4">
+	{%include '_messages.html'%}
+
+	<div class="row">
+		<div class="colo-md-12">
+	<table class="table table-sm">
+		<thead>
+			<th>id</th>
+	
+			<th>title</th>
+			
+			<th>Price</th>
+			
+			<th>Discount</th>
+			<th>Subtotal</th>
+			
+			
+		</thead>
+		<tbody>
+			{%for key, post in session['Shoppingcart'].items()%}
+			
+			{% set discount =(post.discount/100) * post.price|float %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td><img src="{{url_for('static', filename='img/'+ post.img_file)}}" alt="{{post.title}}" width="50" height="45"></td>
+				<td>{{post.title}}</td>
+				<form action="{{url_for('updatecart' ,code=key)}}" method="post">
+				<td>${{"%.2f"|format(post.price)}}</td>
+				
+				{%if post.discount > 0 %}
+				<td>{{post.discount}}% &nbsp; &nbsp; is {{"%2f"|format(discount)}}</td>
+				{%else%}
+				
+				{%endif%}
+				{%set subtotal = post.price|float%}
+				<td>${{"%.2f" | format(subtotal - discount|round(1,'floor'))}}</td>
+				
+			    </form>
+			    
+				<td><a href="{{url_for('deleteitem', id=key)}}" class="btn btn-sm btn-dnger">Remove</a></td>
+			</tr>
+			{%endfor%}
+			</tbody>
+		</table>
+		<table class="table table-sm">
+			<tr>
+				
+				<td><a href="{{url_for('get_order')}}" class="btn btn-success">order now</a></td>
+				<td width="35%"></td>
+				<td colspan="3"><h5>Tax: ${{tax}}</h5></td>
+				<td colspan="4"><h5>Grand total: ${{grandtotal}}</h5></td>
+				<td><a href="{{url_for('clearcart')}}" class="btn btn-sm btn-dnger float-right mr-4">Clear cart</a></td>
+			</tr>
+		</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

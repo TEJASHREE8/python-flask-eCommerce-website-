@@ -1,0 +1,26 @@
+{
+
+  "params":
+  {
+    "local_server":"True",
+    "local_uri": "mysql://root:@localhost/johson_arts",
+    "prod_uri": "mysql://root:@localhost/johson_arts",
+    "fb_url": "https://facebook.com/johson_arts",
+    "tw_url": "https://twitter.com/johson_arts",
+    "gh_url": "https://github.com/johson_arts",
+    "blog_name": "Johnson ARTS",
+    "tag_line": "art",
+    "gmail-user": "admin@gmail.com",
+    "gmail-password": "mailpassword",
+    "about_text": "about me ",
+    "no_of_posts": 12,
+    "login_image": "login.svg",
+    "admin_user": "adminusername",
+    "admin_password": "adminpassword",
+    "upload_location": "C:\\Users\\Shree\\PycharmProjects\\flask_web\\static",
+    "upload_paintings": "C:\\Users\\Shree\\PycharmProjects\\flask_web\\static\\img",
+    "publishable_key":"",
+    "stripe_key" : "stripe api key"
+
+  }
+}
